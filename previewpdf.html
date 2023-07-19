@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Viewer</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        #pdfContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 500px;
+            height: 900px;
+            cursor: pointer;
+        }
+        #pdfEmbed {
+            width: 700px;
+            height: 500px;
+        }
+        #pdfInput {
+            display: none;
+        }
+        #browseButton {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+    </div>
+    <div id="pdfContainer">
+        <center>
+            <div id="subheader">
+            </div>
+            <label for="pdfInput" id="pdfLabel">
+                <embed id="pdfEmbed" src="">
+            </label>
+            <input type="file" id="pdfInput" accept=".pdf">
+        </center>
+    </div>
+    <button id="browseButton" onclick="loadPDF()">Browse</button>
+
+    <script>
+        function loadPDF() {
+            var fileInput = document.getElementById('pdfInput');
+            fileInput.click();
+        }
+
+        document.getElementById('pdfContainer').addEventListener('click', function() {
+            loadPDF();
+        });
+
+        document.getElementById('pdfInput').addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            var objectURL = URL.createObjectURL(file);
+            var embedElement = document.getElementById('pdfEmbed');
+            embedElement.src = objectURL;
+        });
+    </script>
+</body>
+</html>
